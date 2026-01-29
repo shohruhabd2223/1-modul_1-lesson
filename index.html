@@ -378,9 +378,9 @@
                 </div>
             </div>
 
-            <!-- 14. Yakuniy topshiriq -->
+            <!-- 14. Yakuniy topshiriq (Amaliy mashg'ulot) -->
             <div class="slide bg-yellow-50">
-                <div class="bg-white p-8 rounded-3xl shadow-lg border-2 border-yellow-200 max-w-3xl">
+                <div class="bg-white p-8 rounded-3xl shadow-lg border-2 border-yellow-200 max-w-3xl w-full">
                     <h2 class="text-3xl font-bold text-pdp-dark mb-6">Yakuniy topshiriq</h2>
                     <div class="space-y-6 text-left">
                         <div class="flex items-start gap-4">
@@ -395,7 +395,36 @@
                 </div>
             </div>
 
-            <!-- 15. YAKUN -->
+            <!-- 15. Homework (Uyga vazifa) -->
+            <div class="slide bg-yellow-50">
+                <div class="bg-white p-8 rounded-3xl shadow-lg border-2 border-yellow-200 max-w-3xl w-full">
+                    <h2 class="text-3xl font-bold text-pdp-dark mb-6 text-center">Homework</h2>
+                    <div class="space-y-4 text-left">
+                        <div class="flex items-start gap-4">
+                            <span class="bg-pdp-cyan text-white w-8 h-8 flex-shrink-0 flex items-center justify-center rounded-full font-bold text-sm">1</span>
+                            <p class="text-lg text-gray-700">9 va 3 sonlari ustida arifmetik amallar bajaring (qo'shish, ayirish, ko'paytirish, bo'lish).</p>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <span class="bg-pdp-cyan text-white w-8 h-8 flex-shrink-0 flex items-center justify-center rounded-full font-bold text-sm">2</span>
+                            <p class="text-lg text-gray-700">9 va 3 sonini qoldiqsiz bo'ling.</p>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <span class="bg-pdp-cyan text-white w-8 h-8 flex-shrink-0 flex items-center justify-center rounded-full font-bold text-sm">3</span>
+                            <p class="text-lg text-gray-700">9 sonini avval 2-chi darajasini, keyin esa 4 hamda 5-chi darajasini chiqaring.</p>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <span class="bg-pdp-cyan text-white w-8 h-8 flex-shrink-0 flex items-center justify-center rounded-full font-bold text-sm">4</span>
+                            <p class="text-lg text-gray-700"><a href="https://monkeytype.com" target="_blank" class="text-pdp-cyan font-bold hover:underline">monkeytype.com</a> saytidan yozish tezligi kamida 25 tadan oshirib kelish.</p>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <span class="bg-pdp-cyan text-white w-8 h-8 flex-shrink-0 flex items-center justify-center rounded-full font-bold text-sm">5</span>
+                            <p class="text-lg text-gray-700">Python dasturlash tilini kompyuteringizga o'rnatib keling. (slide oxirida qanday o'rnatish ketma-ketligi mavjud)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 16. YAKUN -->
             <div class="slide bg-white">
                 <div class="flex flex-col items-center animate-bounce-slow">
                     <div class="w-32 h-32 bg-pdp-cyan rounded-full flex items-center justify-center mb-6 shadow-lg shadow-cyan-200">
@@ -415,7 +444,7 @@
     <script>
         let currentSlide = 0;
         const slidesWrapper = document.getElementById('slidesWrapper');
-        const totalSlides = 15;
+        const totalSlides = 16;
         const counterElement = document.getElementById('slide-counter');
 
         function updateSlide() {
@@ -445,18 +474,30 @@
         // Kodni nusxalash funksiyasi
         function copyCode(elementId) {
             const codeToCopy = 'print("Hello World")';
+            // Izoh: Iframe ichida clipboard API ba'zida cheklovga uchrashi mumkin,
+            // shuning uchun eski usul (execCommand) ishlatilmoqda.
             const tempInput = document.createElement("input");
             tempInput.value = codeToCopy;
             document.body.appendChild(tempInput);
             tempInput.select();
-            document.execCommand("copy");
-            document.body.removeChild(tempInput);
 
-            const tooltip = document.getElementById("myTooltip1");
-            tooltip.innerHTML = "Nusxalandi!";
-            setTimeout(() => {
-                tooltip.innerHTML = "Nusxalash";
-            }, 2000);
+            try {
+                document.execCommand("copy");
+                const tooltip = document.getElementById("myTooltip1");
+                tooltip.innerHTML = "Nusxalandi!";
+                tooltip.style.opacity = 1;
+                tooltip.style.visibility = "visible";
+
+                setTimeout(() => {
+                    tooltip.innerHTML = "Nusxalash";
+                    tooltip.style.opacity = 0;
+                    tooltip.style.visibility = "hidden";
+                }, 2000);
+            } catch (err) {
+                console.error("Nusxalashda xatolik:", err);
+            }
+
+            document.body.removeChild(tempInput);
         }
 
         // Klaviatura orqali boshqarish
